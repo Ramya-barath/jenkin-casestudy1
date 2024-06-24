@@ -1,15 +1,10 @@
-FROM ubuntu
-
-RUN apt-get update \
-    && apt-get install -y apache2 wget unzip 
-
-RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/neogym.zip
-
-RUN unzip neogym.zip -d /var/www/html 
-
-RUN rm -f /var/www/html/index.html \
-    && mv /var/www/html/neogym-html/* /var/www/html 
-
+FROM httpd:2.4
+RUN apt-get update
+RUN apt-get install wget -y
+RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/oxer.zip
+RUN apt-get install unzip -y
+RUN unzip oxer.zip
+RUN cp -r oxer-html/ /usr/local/apache2/htdocs/
+RUN rm -rf oxer.zip oxer-html
 EXPOSE 80
-
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["httpd-foreground"]

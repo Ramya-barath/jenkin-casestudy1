@@ -1,5 +1,6 @@
 FROM httpd:2.4
 RUN apt-get update
+RUN apt-get install wget -y
 RUN wget https://www.free-css.com/assets/files/free-css-templates/download/page296/oxer.zip
 RUN apt-get install unzip -y
 RUN unzip oxer.zip
